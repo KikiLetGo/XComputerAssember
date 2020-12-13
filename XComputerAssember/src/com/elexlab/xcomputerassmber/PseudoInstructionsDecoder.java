@@ -3,44 +3,31 @@ package com.elexlab.xcomputerassmber;
 
 import com.elexlab.xcomputerassmber.exceptions.BadInstructionException;
 
-public class PseudoInstructionsDecoder {
+import java.util.List;
+
+public class PseudoInstructionsDecoder extends InstructionsDecoder{
+
 
     public String decodeInstruction(String instruction){
-        instruction = instruction.trim();
-        String[] segments = instruction.split(" ");
-        if(segments == null || segments.length != 2){
-            throw new BadInstructionException("instruction must contains code and register");
-        }
-        String code = segments[0];
-        String registersOrIm = segments[1];
+        System.out.println("伪指令："+instruction);
+
         String trueCode = "";
-        if("movi".equals(code)){
-            trueCode += "addi ";
-            trueCode += parseMovi(registersOrIm);
+
+        trueCode += "addi ";
+        if(isImIns(instruction)){
+            int register = extractRegisters(instruction,1).get(0);
+            trueCode += "r"+register+",r7,";
+            int im = extractIm(instruction);
+            trueCode += im;
+
+        }else{
+            List<Integer> rns = extractRegisters(instruction,2);//rt,rs
+            int rt = rns.get(0);
+            int rs = rns.get(1);
+            trueCode += "r"+rt+",";
+            trueCode += "r"+rs+",r7";
         }
-        if("mov".equals(code)){
-            trueCode += "addi ";
-            trueCode += parseMov(registersOrIm);
-        }
-        return trueCode;
-    }
-    private String parseMovi(String registersOrIm){
-        String[] segments = registersOrIm.split(",");
-        String rt = segments[0];
-        String im = segments[1];
-        String trueCode = "";
-        trueCode += rt;
-        trueCode += ",r7,";
-        trueCode += im;
-        return trueCode;
-    }
-    private String parseMov(String registersOrIm){
-        String[] segments = registersOrIm.split(",");
-        String rt = segments[0];
-        String rs = segments[1];
-        String trueCode = "";
-        trueCode += rt;
-        trueCode += ","+rs+",0";
+
         return trueCode;
     }
 }

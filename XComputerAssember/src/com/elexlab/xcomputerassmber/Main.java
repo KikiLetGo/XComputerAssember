@@ -13,7 +13,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String sourceCodeName = "demo";
+        String sourceCodeName = "snake";
         String filePath = baseDir+"/testasm/"+sourceCodeName+".asm";
         String hex = new Assembler().assemble(filePath);
 

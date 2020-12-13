@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 public class Test {
     public static void main(String[] args) {
        // String ins = "movi,r0,4";
-        String ins = "add r1,r0,4";
+        String ins = "addi r1,r0,10";
         //Pattern reg = Pattern.compile("^(.+),(.+,.+),(\\d+)");
         //Pattern reg = Pattern.compile("r([0-7])+");
         //Pattern reg = Pattern.compile(".*i,");
         //Pattern reg = Pattern.compile("[^r](\\d)+");
-        Pattern reg = Pattern.compile("(.+)(\\s+)");
+        Pattern reg = Pattern.compile("(r[0-7],r[0-7],r[0-7])");
         Matcher matcher = reg.matcher(ins);
 
         while (matcher.find()){
