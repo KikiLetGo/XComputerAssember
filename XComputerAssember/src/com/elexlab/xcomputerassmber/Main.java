@@ -13,12 +13,17 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String sourceCodeName = "snake";
-        String filePath = baseDir+"/testasm/"+sourceCodeName+".asm";
+        String filePath = args[0];
+        System.out.println("asm path:"+filePath);
+        //String sourceCodeName = "snake";
+        //String filePath = baseDir+"/testasm/"+sourceCodeName+".asm";
         String hex = new Assembler().assemble(filePath);
 
         //String hexFilePath = baseDir+"/hex/"+sourceCodeName+".hex";
-        String hexFilePath ="/Users/BruceYoung/Documents/temp/"+sourceCodeName+".hex";
+        String fileName = new File(filePath).getName();
+        String name = fileName.substring(0,fileName.indexOf('.'));
+        String hexPath = "./"+name+".hex";
+        String hexFilePath =hexPath;
         saveHex(hex,hexFilePath);
 
 

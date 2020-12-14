@@ -3,7 +3,7 @@ package com.elexlab.xcomputerassmber.pojo;
 /**
  * @ClassName: Instruction
  * @Description: TODO
- * @author: DJ008854
+ * @author: BruceYoung
  * @date: 2020年12月04日 17:01
  */
 public class Instruction {
